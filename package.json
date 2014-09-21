@@ -1,0 +1,19 @@
+{
+  "name": "piazza-data-collector",
+  "version": "0.1.0",
+  "description": "Collects various information from piazza",
+  "main": "piazza-data-collector.js",
+  "dependencies": {
+    "chalk": "^0.5.1",
+    "request": "^2.44.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "piazza"
+  ],
+  "author": "Lee Bousfield",
+  "license": "MIT"
+}
