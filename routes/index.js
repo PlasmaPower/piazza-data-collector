@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
   if (!contentDefined) {
     req.app.wrapper.getFeed(function (err, data) {
       if (err !== null) {
-        console.log(chalk.red('Error getting example content: ' + err));
+        console.log(chalk.yellow('Error getting example content: ' + err));
       } else {
         content = data;
         contentDefined = true;

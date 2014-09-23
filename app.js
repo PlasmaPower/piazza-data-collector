@@ -169,7 +169,11 @@ app.config.on('load', function () {
         console.log(chalk.red('Error getting online users: ' + err));
         process.exit(21);
       }
-      console.log(chalk.green('Successfully sent getNumUsers'));
+      if (body.result === null) {
+        console.log(chalk.yellow('Null response recieved for test network request'));
+      } else {
+        console.log(chalk.green('Successfully sent test network request'));
+      }
       console.log(body);
       console.log(chalk.green('Starting up server...'));
       app.server = app.listen(3000, function() {
