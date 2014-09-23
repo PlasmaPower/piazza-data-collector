@@ -1,4 +1,6 @@
 {
   "email": "blah@blah.com",
-  "password": "yourpassword"
+  "password": "yourpassword",
+  "nid": "123456789abcde",
+  "uid": "123456789abcde"
 }

@@ -20,4 +20,4 @@ Edit it with notepad or another plain text editing program and put in your email
 Starting
 =====================
 
-Go to the directory of this in a terminal, then enter `node piazza-data-collector.js`.
+Go to the directory of this in a terminal, then enter `node app.js`.
