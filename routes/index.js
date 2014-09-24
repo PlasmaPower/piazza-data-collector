@@ -2,31 +2,17 @@ var express = require('express');
 var router = express.Router();
 var chalk = require('chalk');
 
-var content = 'Loading, please try again in a bit.';
-var contentDefined = false;
+var api = require('../api.js');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  if (!contentDefined) {
-    req.app.wrapper.getFeed(function (err, data) {
-      if (err !== null) {
-        console.log(chalk.yellow('Error getting example content: ' + err));
-      } else {
-        content = data;
-        contentDefined = true;
-        res.render('index', {
-          title: 'Express',
-          content: JSON.stringify(content)
-        });
-      }
-    });
-  }
-  if (contentDefined) {
-    res.render('index', {
-      title: 'Express',
-      content: JSON.stringify(content)
-    });
-  }
+  res.render('index', {
+    title: 'Sums',
+    description: 'The first page! Adds up various totals in a table.',
+    stats: api.wrapper.getStats(),
+    types: ['question', 'followup', 'feedback' 'note', 's_answer', 'i_answer',
+      'question_edit', 'note_edit', 's_answer_edit', 'i_answer_edit']
+  });
 });
 
 module.exports = router;

@@ -2,5 +2,6 @@
   "email": "blah@blah.com",
   "password": "yourpassword",
   "nid": "123456789abcde",
-  "uid": "123456789abcde"
+  "uid": "123456789abcde",
+  "port": 3000
 }
