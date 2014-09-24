@@ -8,12 +8,12 @@ block content
       th Name
       each type in typesReadable
         th #{type}
-    each data, name in stats
+    each name in getKeys(stats).sort()
       tr
         td #{name}
         each type in types
-          -if (typeof(data[type]) !== 'undefined'){
-            td #{data[type]}
+          -if (typeof(stats[name][type]) !== 'undefined'){
+            td #{stats[name][type]}
           -}else{
             td 0
           -}

@@ -13,7 +13,16 @@ router.get('/', function(req, res) {
     typesReadable: ['Question', 'Comment', 'Reply to Comment', 'Note', 'Student Answer', 'Instructor Answer',
       'Question Edit', 'Note Edit', 'Student Answer Edit', 'Instructor Answer Edit'],
     types: ['question', 'followup', 'feedback', 'note', 's_answer', 'i_answer',
-      'question_edit', 'note_edit', 's_answer_edit', 'i_answer_edit']
+      'question_edit', 'note_edit', 's_answer_edit', 'i_answer_edit'],
+    getKeys: function (obj) {
+      var keys = [];
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          keys.push(key);
+        }
+      }
+      return keys;
+    }
   });
 });
 
