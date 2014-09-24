@@ -171,6 +171,10 @@ wrapper.on('authed', function () {
             return;
           }
           var incStat = function (stats, name, type) {
+            if (name.indexOf(' ') !== -1) {
+              name = name.substring(0, name.indexOf(' ')) +
+                name.substring(name.indexOf(' '), name.indexOf(' ') + 2);
+            }
             if (stats[name] === undefined) {
               stats[name] = {};
             }
