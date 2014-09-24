@@ -3,17 +3,23 @@ extends layout
 block content
   h1(class='page-header')= title
   p #{description}
-  table(class='table')
-    tr
-      th Name
-      each type in typesReadable
-        th #{type}
-    each name in getKeys(stats).sort()
+  table(id='mainTable' class='table sortable')
+    thead
       tr
-        td #{name}
-        each type in types
-          -if (typeof(stats[name][type]) !== 'undefined'){
-            td #{stats[name][type]}
-          -}else{
-            td 0
-          -}
+        th(data-defaultsort='asc') Name
+        each type,i in typesReadable
+          th #{type}
+    tbody
+      each name in getKeys(stats).sort(function(a,b){return a.toLowerCase().localeCompare(b.toLowerCase());})
+        tr
+          td #{name}
+          each type in types
+            -if (typeof(stats[name][type]) !== 'undefined'){
+              td #{stats[name][type]}
+            -}else{
+              td 0
+            -}
+  script.
+    $(document).ready(function() {
+      $("#mainTable").tablesorter({sortList: [[0,0]]});
+    });
