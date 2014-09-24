@@ -10,6 +10,8 @@ router.get('/', function(req, res) {
     title: 'Sums',
     description: 'The first page! Adds up various totals in a table.',
     stats: api.wrapper.getStats(),
+    typesReadable: ['Question', 'Comment', 'Reply to Comment', 'Note', 'Student Answer', 'Instructor Answer',
+      'Question Edit', 'Note Edit', 'Student Answer Edit', 'Instructor Answer Edit'],
     types: ['question', 'followup', 'feedback', 'note', 's_answer', 'i_answer',
       'question_edit', 'note_edit', 's_answer_edit', 'i_answer_edit']
   });
