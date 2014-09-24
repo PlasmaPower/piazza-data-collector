@@ -150,7 +150,7 @@ wrapper.getName = function (uid, callback) {
   }
 };
 
-var stats = {};
+var stats;
 
 wrapper.getStats = function () {
   return stats;
@@ -163,6 +163,7 @@ wrapper.on('authed', function () {
       return;
     }
     var feed = data.feed;
+    stats = {};
     for (var i = 0; i < feed.length; i++) {
       wrapper.getContent(
         feed[i].id, config.json.nid, function (err, data) {
