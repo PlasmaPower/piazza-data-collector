@@ -146,7 +146,7 @@ wrapper.getName = function (uid, callback) {
       wrapper.nameCoord[uid][wrapper.nameCoord[uid].length] = callback;
     }
   } else {
-    return wrapper.nameTable[uid];
+    callback(wrapper.nameTable[uid]);
   }
 };
 
