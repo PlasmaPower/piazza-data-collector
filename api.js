@@ -138,8 +138,9 @@ wrapper.getName = function (uid, callback) {
         }
         callback(data.name);
         wrapper.nameTable[uid] = data.name;
-        for (var i = 0; i < wrapper.nameCoord[uid].length; i++) {
-          wrapper.nameCoord[uid][i](data.name);
+        while (wrapper.nameCoord[uid].length > 0) {
+          wrapper.nameCoord[uid][0](data.name);
+          wrapper.nameCoord[uid].shift();
         }
       });
     } else {
@@ -164,6 +165,7 @@ wrapper.on('authed', function () {
     }
     var feed = data.feed;
     stats = {};
+    wrapper.nameCoord = {};
     for (var i = 0; i < feed.length; i++) {
       wrapper.getContent(
         feed[i].id, config.json.nid, function (err, data) {
@@ -186,21 +188,22 @@ wrapper.on('authed', function () {
           };
           var parse = function (obj) {
             if (obj === undefined) {
+              console.log(chalk.yellow('Tried to parse undefined object'));
               return;
             }
             var mainType = obj.type;
             for (var i = 0; i < ((obj.history === undefined) ? 1 : obj.history.length); i++) {
               var curr = (obj.history === undefined) ? obj : obj.history[i];
-              if (curr.anon !== "no") {
+              if (curr.anon !== 'no') {
                 if (i === 0) {
                   incStat(stats, 'Anonymous', mainType);
                 } else {
                   incStat(stats, 'Anonymous', mainType + '_edit');
                 }
               } else {
-                var tmp = i;
+                var tmp = i === 0;
                 wrapper.getName(curr.uid, function (name) {
-                  if (tmp === 0) {
+                  if (tmp) {
                     incStat(stats, name, mainType);
                   } else {
                     incStat(stats, name, mainType + '_edit');

@@ -1,11 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var chalk = require('chalk');
+var fs = require('fs');
 
 var api = require('../api.js');
 
 /* GET home page. */
 router.get('/', function(req, res) {
+  if (req.ip.indexOf('192.168') !== 0 && req.ip !== '127.0.0.1') {
+    req.app.hits++;
+    fs.writeFile(__dirname + '../hits', req.app.hits + '\n', function(err) {
+      if(err) {
+        console.log(chalk.yellow('Could not write to the hits file!'));
+        return;
+      }
+    });
+  }
   res.render('index', {
     title: 'Sums',
     description: 'The first page! Adds up various totals in a table.',
@@ -22,7 +32,8 @@ router.get('/', function(req, res) {
         }
       }
       return keys;
-    }
+    },
+    hits: req.app.hits
   });
 });
 

@@ -3,6 +3,7 @@ extends layout
 block content
   h1(class='page-header')= title
   p #{description}
+  p Total views of this site: #{hits}
   table(id='mainTable' class='table sortable')
     thead
       tr

@@ -80,6 +80,39 @@ api.config.on('load', function () {
   });
 });
 
+app.hits = 0;
+
+fs.exists(__dirname + '/hits', function(exists) {
+  if (exists) {
+    fs = require('fs');
+    fs.readFile(__dirname + '/hits', 'utf8', function (err,data) {
+      if (err) {
+        console.log(chalk.yellow('Could not read the hits file even though it exists!'));
+        console.log(chalk.yellow('Check the permissions on the hits file'));
+        return;
+      }
+      try {
+        app.hits = parseInt(data);
+      } catch (err) {
+        console.log(chalk.yellow('Failed to parse the hits file'));
+        console.log(chalk.yellow('It should be an integer'));
+        console.log(chalk.yellow('It will be overwriten at the next hit'));
+        app.hits = 0;
+        return;
+      }
+    });
+  } else {
+    fs.writeFile(__dirname + '/hits', app.hits + '\n', function(err) {
+      if(err) {
+        console.log(chalk.yellow('Could not create the hits file!'));
+        return;
+      }
+      console.log(chalk.green('Created hits file as it did not exist'));
+      hits = 0;
+    });
+  }
+});
+
 setInterval(function () {
   api.wrapper.auth(api.config.json.email, api.config.json.password, function (err, body) {
     if (err !== null) {
